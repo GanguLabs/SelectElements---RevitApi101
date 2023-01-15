@@ -26,7 +26,11 @@ namespace SelectElements
             // pickedObjs = uidoc.Selection.PickObjects(ObjectType.Element, "Select Elements");
             Reference pickedref = uidoc.Selection.PickObject(ObjectType.Element, "Please select a element");
 
-            pickedObjs.Add(pickedref);
+            List<Reference> customPick = new List<Reference>
+            {
+                pickedref,
+            };
+            pickedObjs = customPick;
 
             List<ElementId> ids = (from Reference r in pickedObjs select r.ElementId).ToList();
 
@@ -39,6 +43,12 @@ namespace SelectElements
                     foreach (ElementId eid in ids)
                     {
                         Element e = doc.GetElement(eid);
+                        // Wall wall = e as Wall;
+
+                        List<Material> mats = e.GetMaterialIds(false).ToList().Select(x => doc.GetElement(x) as Material).ToList();
+                        // ref: https://forums.autodesk.com/t5/revit-api-forum/getting-compoundstructure-of-wall-in-rvtlink/m-p/9615171/highlight/true#M48205
+
+
                         sb.AppendLine(e.Name);
                     }
                     TaskDialog.Show("title: ", sb.ToString());
