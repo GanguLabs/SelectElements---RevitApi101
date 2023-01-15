@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+ <AddIn Type="Command">
+       <Name>Select Elements - Test</Name>
+       <FullClassName>SelectElements.Command</FullClassName>
+       <Text>Select Elements - Test</Text>
+       <Description>Select Elements in Revit</Description>
+       <VisibilityMode>AlwaysVisible</VisibilityMode>
+       <Assembly>SelectElements\SelectElements.dll</Assembly>
+       <AddInId>502fe383-2648-4e98-adf8-5e6047f9dc32</AddInId>
+    <VendorId>ADSK</VendorId>
+    <VendorDescription>Autodesk, Inc, www.autodesk.com</VendorDescription>
+ </AddIn>
+</RevitAddIns>
