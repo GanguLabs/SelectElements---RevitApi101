@@ -66,6 +66,8 @@ namespace SelectElements
                         }
                         else if(e is FamilyInstance)
                         {
+                            #region editFamily
+                            // reference: https://forums.autodesk.com/t5/revit-api-forum/get-elements-inside-a-family-instance/m-p/7584618/highlight/true#M26787
 
                             FamilyInstance famInst = doc.GetElement(new ElementId(335742)) as FamilyInstance;
                             Family family = famInst.Symbol.Family;
@@ -79,7 +81,10 @@ namespace SelectElements
                             // close family document after iteration
                             famDoc.Close(false);
 
+                            #endregion
 
+
+                            #region stackOv-1
 
                             // reference: https://stackoverflow.com/a/30338440/6908282
                             List<Element> listFamilyInstances = new FilteredElementCollector(doc, doc.ActiveView.Id)
@@ -89,6 +94,11 @@ namespace SelectElements
                                                                 .SelectMany(a => a.GetSubComponentIds())
                                                                 .Select(a => doc.GetElement(a))
                                                                 .ToList();
+                            #endregion
+
+                            #region StackOv-2
+                            //reference: https://stackoverflow.com/a/29339317/6908282
+
 
                             FamilyInstance aFamilyInst = e as FamilyInstance;
                             // we need to skip nested family instances 
@@ -118,6 +128,8 @@ namespace SelectElements
                                     }
                                 }
                             }
+                            #endregion
+
                         }
                         else
                         {
