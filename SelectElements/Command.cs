@@ -22,7 +22,12 @@ namespace SelectElements
             Application app = uiapp.Application;
             Document doc = uidoc.Document;
 
-            IList<Reference> pickedObjs = uidoc.Selection.PickObjects(ObjectType.Element, "Select Elements");
+            IList<Reference> pickedObjs = null;
+            // pickedObjs = uidoc.Selection.PickObjects(ObjectType.Element, "Select Elements");
+            Reference pickedref = uidoc.Selection.PickObject(ObjectType.Element, "Please select a element");
+
+            pickedObjs.Add(pickedref);
+
             List<ElementId> ids = (from Reference r in pickedObjs select r.ElementId).ToList();
 
             using (Transaction tx = new Transaction(doc))
